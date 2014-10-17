@@ -20,16 +20,43 @@ public class Calculator {
 	}
 
 	private static String[] splitNumbers(String numbers){
-		String delimeter = "";
+		String delimeter = null;
 		if(numbers.startsWith("//")){
-			delimeter = numbers.substring(2,3);
 			int index = numbers.indexOf("\n");
+			if(isLongDelimeter(numbers))
+			{
+				delimeter = getDelimeters(numbers);
+			}
+			else{
+				delimeter = numbers.substring(2,3);
+			}
 			numbers = numbers.substring(index + 1);
 		}
-		delimeter = "[\n" + "," + delimeter +"]";
+		delimeter = "[\n" + "," + delimeter +"]+";
 		return numbers.split(delimeter);
 
-	} 
+	}
+	private static String getDelimeters(String numbers)
+	{
+		String delimeter = null;
+		if (isLongDelimeter(numbers)){
+			int index = numbers.indexOf("]"); 
+			delimeter = numbers.substring(3,index);
+		}
+		return delimeter;
+	}
+	private static boolean isLongDelimeter(String numbers)
+	{
+		if(numbers.substring(2).startsWith("["));
+		{
+			int index = numbers.indexOf("]");
+			if((index - 2) > 1){
+				return true;
+			}
+		}
+		return false;
+	}
+
     private static int sum(String[] numbers){
     	int total = 0;
 		for(String number : numbers){
