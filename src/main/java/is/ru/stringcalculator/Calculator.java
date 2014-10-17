@@ -45,9 +45,10 @@ public class Calculator {
     	String messageText = "negatives not allowed: ";
     	for(int i = 0; i < numbers.length; i++){
     		if(numbers[i].contains("-")){
-    			messageText = messageText + numbers[i];
+    			messageText = messageText + numbers[i] + ",";
     		}
     	}
+    	messageText = messageText.substring(0, messageText.length() - 1);
     	return messageText;
     }
 }

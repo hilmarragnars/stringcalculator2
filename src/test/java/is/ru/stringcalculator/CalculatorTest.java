@@ -43,10 +43,17 @@ public class CalculatorTest {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	@Test
-	public void throwsExceptionWhenNegativeNumbersAreGiven() {
+	public void throwsExceptionWhenNegativeNumbersAreGivenOne() {
     
     thrown.expect(IllegalArgumentException.class);
     thrown.expectMessage(equalTo("negatives not allowed: -1"));
     Calculator.add("-1,2");
+	}
+	@Test
+	public void throwsExceptionWhenNegativeNumbersAreGivenMultible() {
+    
+    thrown.expect(IllegalArgumentException.class);
+    thrown.expectMessage(equalTo("negatives not allowed: -4,-5"));
+    Calculator.add("2,-4,3,-5");
 	}
 }
