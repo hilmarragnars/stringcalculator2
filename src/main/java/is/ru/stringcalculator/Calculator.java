@@ -7,7 +7,7 @@ public class Calculator {
 		if(text.equals("")){
 			return 0;
 		}
-		else if(text.contains(",") || text.contains("\n")){
+		else if(text.contains(",") || text.contains("\n") || text.startsWith("//")){
 			return sum(splitNumbers(text));
 		}
 		else{
@@ -21,7 +21,15 @@ public class Calculator {
 	}
 
 	private static String[] splitNumbers(String numbers){
-		return numbers.split("[\n,]");
+		String delimeter = "";
+		if(numbers.startsWith("//")){
+			delimeter = numbers.substring(2,3);
+			int index = numbers.indexOf("\n");
+			numbers = numbers.substring(index + 1);
+		}
+		delimeter = "[\n" + "," + delimeter +"]";
+		return numbers.split(delimeter);
+
 	}
      
     private static int sum(String[] numbers){
