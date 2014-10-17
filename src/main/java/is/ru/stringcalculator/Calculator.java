@@ -37,7 +37,9 @@ public class Calculator {
 				String message = exceptionMessage(numbers);
 				throw new IllegalArgumentException(message);
 			}
-			total += toInt(number);
+			if(toInt(number) < 1000){
+				total += toInt(number);
+			}
 		}
 		return total;
     }
