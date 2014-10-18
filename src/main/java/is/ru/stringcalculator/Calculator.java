@@ -23,7 +23,7 @@ public class Calculator {
 		String delimeter = null;
 		if(numbers.startsWith("//")){
 			int index = numbers.indexOf("\n");
-			if(isLongDelimeter(numbers))
+			if(isLongOrMultibleDelimeter(numbers))
 			{
 				delimeter = getDelimeters(numbers);
 			}
@@ -38,21 +38,23 @@ public class Calculator {
 	}
 	private static String getDelimeters(String numbers)
 	{
-		String delimeter = null;
-		if (isLongDelimeter(numbers)){
-			int index = numbers.indexOf("]"); 
-			delimeter = numbers.substring(3,index);
-		}
+		String delimeter = "";
+		int index = 0;
+		int nextIndex = 0;
+		do{
+			index = numbers.indexOf("[", index + 1);
+			nextIndex = numbers.indexOf("]", index);
+			if(index != -1){
+				delimeter += numbers.substring(index + 1, nextIndex);
+			}
+
+		}while(index !=-1);
 		return delimeter;
 	}
-	private static boolean isLongDelimeter(String numbers)
+	private static boolean isLongOrMultibleDelimeter(String numbers)
 	{
-		if(numbers.substring(2).startsWith("["));
-		{
-			int index = numbers.indexOf("]");
-			if((index - 2) > 1){
-				return true;
-			}
+		if(numbers.substring(2).startsWith("[")){
+			return true;
 		}
 		return false;
 	}

@@ -66,4 +66,8 @@ public class CalculatorTest {
 	public void testAnyLengthOfDelimeters(){
 		assertEquals(6, Calculator.add("//[***]\n1***2***3"));
 	}
+	@Test
+	public void testMultipleDelimeters(){
+		assertEquals(6, Calculator.add("//[*][%]\n1*2%3"));
+	}
 }
